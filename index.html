@@ -1,0 +1,30 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Основной сайт. В эту страницу встраивается фрейм</title>
+ </head>
+ <body>
+    <h1>Основной сайт. На эту страницу встроен фрейм</h1>
+    <iframe 
+        id='myFrame'
+        name="myFrame"
+        frameborder="0"
+        src="http://127.0.0.1:8081"
+        width="100%">
+    </iframe>
+
+    <script>
+        let frame = document.getElementById('myFrame');
+
+        function postMessageListener(event) {
+            if (event.origin != 'http://127.0.0.1:8081') {
+                return;
+            }
+            frame.height = parseInt(event.data, 10);
+        }
+
+        window.addEventListener("message", postMessageListener);
+    </script>
+ </body>
+ </html>
